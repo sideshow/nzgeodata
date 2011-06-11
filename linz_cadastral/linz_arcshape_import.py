@@ -20,9 +20,9 @@ Usage: %s arcshape_root year dbname
         shapefile = os.path.join(os.path.join(root, name), name)
         print "Importing into table %s" % (name,)
         os.system("""/usr/bin/env shp2pgsql -s 27200 "%s" %s | psql -d %s""" % (shapefile, name, dbname))
-        os.system("""psql -d %s -c "alter table %s drop constraint enforce_srid_the_geom;" """ % (dbname,name,))
-        os.system("""psql -d %s -c "update %s set the_geom = transform(the_geom, 2193);" """ % (dbname,name,))
-        os.system("""psql -d %s -c "ALTER TABLE %s ADD CONSTRAINT enforce_srid_the_geom CHECK (srid(the_geom) = 2193);" """ % (name,))
+        os.system("""/usr/bin/env psql -d %s -c "alter table %s drop constraint enforce_srid_the_geom;" """ % (dbname,name,))
+        os.system("""/usr/bin/env psql -d %s -c "update %s set the_geom = transform(the_geom, 2193);" """ % (dbname,name,))
+        os.system("""/usr/bin/env psql -d %s -c "ALTER TABLE %s ADD CONSTRAINT enforce_srid_the_geom CHECK (srid(the_geom) = 2193);" """ % (name,))
 
     indexes = [
         "create index idx_mb%(y)s_au%(y)s on mb%(y)s (au%(y)s)" % {'y' : year},
@@ -32,7 +32,7 @@ Usage: %s arcshape_root year dbname
         "create index idx_mb%(y)s_the_geom on mb%(y)s using gist (the_geom gist_geometry_ops)" % {'y' : year},
     ]
     for index in indexes:
-        os.system("""psql -d cdes -c "%s" """ % (index,))
+        os.system("""/usr/bin/env psql -d cdes -c "%s" """ % (index,))
     
 if __name__ == '__main__':
     main()

@@ -19,7 +19,7 @@ Usage: %s arcshape_root year dbname
     for name in tables:
         shapefile = os.path.join(os.path.join(root, name), name)
         print "Importing into table %s" % (name,)
-        os.system("""/usr/lib/postgresql/8.2/bin/shp2pgsql -s 27200 "%s" %s | psql -d %s""" % (shapefile, name, dbname))
+        os.system("""/usr/bin/env shp2pgsql -s 27200 "%s" %s | psql -d %s""" % (shapefile, name, dbname))
         os.system("""psql -d %s -c "alter table %s drop constraint enforce_srid_the_geom;" """ % (dbname,name,))
         os.system("""psql -d %s -c "update %s set the_geom = transform(the_geom, 2193);" """ % (dbname,name,))
         os.system("""psql -d %s -c "ALTER TABLE %s ADD CONSTRAINT enforce_srid_the_geom CHECK (srid(the_geom) = 2193);" """ % (name,))

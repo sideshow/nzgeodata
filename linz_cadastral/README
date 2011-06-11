@@ -38,6 +38,7 @@ More information:
    Currently you need to use the Level 1 boundaries in NZMG: The level 2 
    boundaries have invalid geometries, and the scripts were written before the
    boundaries were released in NZTM.
+   (http://www3.stats.govt.nz/digitalboundaries/annual/NZ_L1_2009_NZMG_ArcShp.zip)
 
 -------------------------------------------------------------------------------
                0. IMPORT THE SOURCE DATA

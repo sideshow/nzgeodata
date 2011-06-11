@@ -34,7 +34,7 @@ More information:
    http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde/index.aspx
  
  - Statistics NZ Digital Boundaries:
-   http://www.stats.govt.nz/statistics-by-area/geography-mapping/download-digital-boundaries.htm
+   http://www.stats.govt.nz/browse_for_stats/people_and_communities/geographic-areas/download-digital-boundaries.aspx
    Currently you need to use the Level 1 boundaries in NZMG: The level 2 
    boundaries have invalid geometries, and the scripts were written before the
    boundaries were released in NZTM.

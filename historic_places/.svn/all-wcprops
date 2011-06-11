@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/9/trunk/historic_places
+END
+NOTICE
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/6/trunk/historic_places/NOTICE
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/6/trunk/historic_places/LICENSE
+END
+example.json
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/8/trunk/historic_places/example.json
+END
+historic-places-scraper.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/9/trunk/historic_places/historic-places-scraper.py
+END

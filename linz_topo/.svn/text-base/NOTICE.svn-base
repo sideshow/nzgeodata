@@ -1,0 +1,14 @@
+NOTICE
+
+LINZ NZTopo Processing Scripts
+Copyright 2008,2009 Koordinates Limited
+http://code.google.com/p/nz-geodata-scripts/
+
+The following CSV files are extracted from the Topographic Data Dictionary, 
+and are Copyright Land Information New Zealand:
+ - ACcodes.csv (V16)
+ - FScodes.csv (V14)
+
+Minor modification have been made:
+ - Old features are still in the extracts, so use the old FSCodes.
+ - 1084/road_image is missing from V16 ACcodes, added manually.

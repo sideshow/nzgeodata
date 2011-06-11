@@ -1,0 +1,10 @@
+NOTICE
+
+LINZ LandOnline Cadastral Processing Scripts
+Copyright 2008 Koordinates Limited
+http://code.google.com/p/nz-geodata-scripts/
+
+The following CSV files are extracted from the LandOnline Bulk Data Extract 
+Data Dictionary, and are Copyright Land Information New Zealand:
+ - appellation_parcel_types.csv
+ - appellation_sub_types.csv

@@ -1,0 +1,121 @@
+LINZ Cadastral Processing Scripts
+
+Part of the NZ GeoData Scripts project:
+  http://code.google.com/p/nz-geodata-scripts/
+
+This file describes how to generate the a number of Shapefiles 
+from compressed LINZ LandOnline data (*.crs.Z files) as provided to subscribers
+to the LINZ LandOnline Bulk Data Extract programme. We also combine this with
+the Statistics NZ Digital Boundaries.
+
+Basically we convert the eightyish tables in the LandOnline CRS database into 
+a few shapefiles based on usage themes:
+ - Geocoding (address, road, suburb, city, district, region, postcode, etc)
+ - Property parcels
+ - Property titles
+ - Roads
+
+First we import a fair chunk of the CRS bulk data records directly from the 
+.crs.Z files as on the DVD and Stats Shapefiles into a PostGIS database. From 
+there we build a bunch of indexes and extract the "themes" into new tables, 
+which can then be dumped to Shapefiles via pgsql2shp.
+
+Requirements:
+ - Python >= 2.4
+ - PostgreSQL & PostGIS
+ - Proj4, preferably with the NZGD2000 grid-shift files installed
+ - GDAL (only needed if you want .prj files created for your exported SHPs)
+
+For support, head to the NZ Open GIS group at:
+  http://groups.google.co.nz/group/nzopengis
+
+More information:
+ - LINZ LandOnline Bulk Data Extract:
+   http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde/index.aspx
+ 
+ - Statistics NZ Digital Boundaries:
+   http://www.stats.govt.nz/statistics-by-area/geography-mapping/download-digital-boundaries.htm
+   Currently you need to use the Level 1 boundaries in NZMG: The level 2 
+   boundaries have invalid geometries, and the scripts were written before the
+   boundaries were released in NZTM.
+
+-------------------------------------------------------------------------------
+               0. IMPORT THE SOURCE DATA
+-------------------------------------------------------------------------------
+
+0.1 Run linz_arcshape_import.py, supplying the path to the ARCSHAPE folder, 
+and the two-digit year that the data was produced in, like so:
+
+  python linz_arcshape_import.py Statistics_NZ/Lv1_2007_Digital_Boundaries/ARCSHAPE/ 07
+
+This script calls psql a bunch of times on your database, so you will want to 
+run as a user who has a saved password/identd auth to avoid re-entering your 
+password lots.
+
+0.2 Edit asp_import.sql and make sure the path to the street.txt file is 
+correct and visible to the database server. Run the script to import the ASP 
+roads data.
+
+0.3 Run buildCRSdata.py, giving it a path to the LINZ CRS data folder, and a 
+database connection string, like so:
+
+  python buildCRSdata.py -c linz_landonline/200702/ \
+  --database-dsn "host=localhost dbname=landonline user=me password=mypw"
+
+0.4 Precompute the spatial joins on the crs_street_address table as follows:
+
+  python spatial_joins.py -y 07 \
+  --database-dsn "host=cook dbname=landonline user=me password=mypw"
+
+This will take a LONG time. Watch a movie or four.
+
+-------------------------------------------------------------------------------
+              1. ROADS AND ADDRESSES (GEOCODING) LAYER
+-------------------------------------------------------------------------------
+
+python build_nz_addresses.py -y 07 \
+  --database-dsn "host=localhost dbname=landonline user=me password=mypw"
+
+/usr/lib/postgresql/8.2/bin/pgsql2shp -f nz_addresses -P mypw landonline nz_addresses
+
+shptree nz_addresses
+
+epsg_tr.py -wkt 2193 > nz_addresses.prj
+
+-------------------------------------------------------------------------------
+              2. PARCELS LAYER
+-------------------------------------------------------------------------------
+
+python build_nz_parcels.py -y 07 --database-dsn "host=localhost dbname=landonline user=me password=mypw"
+
+/usr/lib/postgresql/8.2/bin/pgsql2shp -f nz_parcels -P mypw landonline nz_parcels
+
+shptree nz_parcels
+
+epsg_tr.py -wkt 2193 > nz_parcels.prj
+
+
+-------------------------------------------------------------------------------
+              3. TITLES LAYER
+-------------------------------------------------------------------------------
+
+python build_nz_titles.py -y 07 --database-dsn "host=localhost dbname=landonline user=me password=mypw"
+
+/usr/lib/postgresql/8.2/bin/pgsql2shp -f nz_titles -P mypw landonline nz_titles
+
+shptree nz_titles
+
+epsg_tr.py -wkt 2193 > nz_titles.prj
+
+
+-------------------------------------------------------------------------------
+              4. ROADS LAYER
+-------------------------------------------------------------------------------
+
+python build_nz_roads.py --database-dsn "host=localhost dbname=landonline user=me password=mypw"
+
+/usr/lib/postgresql/8.2/bin/pgsql2shp -f nz_roads -P mypw landonline nz_roads
+
+shptree nz_roads
+
+epsg_tr.py -wkt 2193 > nz_roads.prj

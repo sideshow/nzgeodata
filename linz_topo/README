@@ -1,0 +1,45 @@
+= LINZ NZTopo Processing Scripts =
+
+Part of the NZ GeoData Scripts project:
+  http://code.google.com/p/nz-geodata-scripts/
+
+This script generates Shapefiles or PostGIS tables from the raw LSLIFF data 
+(*.iff files) as provided to purchasers of the LINZ NZTopo extracts. Each layer 
+in the LSLIFF theme (a .iff file) ends up as a Shapefile or PostGIS table.
+
+Requirements:
+ - Python >= 2.4
+ - GDAL/OGR, built with the Python bindings & the PostgreSQL driver
+
+For support, head to the NZ Open GIS group at:
+  http://groups.google.co.nz/group/nzopengis
+
+More information:
+ - LINZ NZTopo data:
+   http://www.linz.govt.nz/topography/topographic-data/index.aspx
+ 
+ - LINZ details on LSLIFF file format:
+   http://www.linz.govt.nz/topography/topographic-data/technical/index.aspx#lsliff
+ 
+== Running the converter ==
+
+To display help and usage information:
+
+  python iff2.py --help
+
+To convert to a set of shapefiles:
+
+  python iff2.py --shapefile out/ /path/to/my.iff
+
+Output shapefiles will be created in the out/ directory.
+
+To convert to PostGIS tables:
+
+  python iff2.py --postgis "dbname=mydb host=myhost user=myuser port=5432 password=mypass" /path/to/my.iff
+
+Notes:
+ * for Chatham Islands data, you will need to make sure EPSG:3793 is recognised
+   by GDAL as well as PostGIS. See http://spatialreference.org/ref/epsg/3793/
+ * If you're getting weird file errors, you may have run into the maximum open
+   files limit for your system. This is quite possible under OSX, less so Linux.
+   You can increase the limit using ulimit (eg. 'ulimit -n 1024').

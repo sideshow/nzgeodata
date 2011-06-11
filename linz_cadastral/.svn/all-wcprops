@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/5/trunk/linz_cadastral
+END
+appellation_sub_types.csv
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/linz_cadastral/appellation_sub_types.csv
+END
+build_nz_titles.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/5/trunk/linz_cadastral/build_nz_titles.py
+END
+NOTICE
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/linz_cadastral/NOTICE
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/linz_cadastral/LICENSE
+END
+linz_arcshape_import.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/5/trunk/linz_cadastral/linz_arcshape_import.py
+END
+landonline_import.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/5/trunk/linz_cadastral/landonline_import.py
+END
+build_nz_roads.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/5/trunk/linz_cadastral/build_nz_roads.py
+END
+build_nz_parcels.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/5/trunk/linz_cadastral/build_nz_parcels.py
+END
+spatial_joins.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/5/trunk/linz_cadastral/spatial_joins.py
+END
+buildCRSdata.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/5/trunk/linz_cadastral/buildCRSdata.py
+END
+build_nz_addresses.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/5/trunk/linz_cadastral/build_nz_addresses.py
+END
+asp_import.sql
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/linz_cadastral/asp_import.sql
+END
+appellation_parcel_types.csv
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/linz_cadastral/appellation_parcel_types.csv
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/4/trunk/linz_cadastral/README
+END

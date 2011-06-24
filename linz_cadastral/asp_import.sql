@@ -18,7 +18,7 @@ create table asp_street (
     status character NULL
 );
 
-COPY asp_street FROM 'landonline/asp/street.txt' DELIMITERS '|' CSV HEADER;
+COPY asp_street FROM 'asp/street.txt' DELIMITERS '|' CSV HEADER;
 
 -- (delete historic records)
 DELETE FROM asp_street where status = 'H';

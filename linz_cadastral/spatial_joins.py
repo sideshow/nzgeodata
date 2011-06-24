@@ -38,7 +38,6 @@ def main():
         usage()
         sys.exit(2)
     
-    
     print "Connecting to database..."
     dbcon = psycopg2.connect(dbdsn)
     dbcon.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
@@ -50,10 +49,11 @@ def main():
     parcel_update_sqls = ["update crs_street_address set parcel_id = (select id from crs_parcel where crs_parcel.toc_code = 'PRIM' and crs_parcel.shape && crs_street_address.shape and contains(crs_parcel.shape, crs_street_address.shape) limit 1) where crs_street_address.id >= %d and crs_street_address.id < %d;" % (i, i + step) for i in range(min_id, max_id + step + 1, step)]
     
     sqls = [
-         "alter table crs_street_address add column meshblock_gid integer;",
-         "alter table crs_street_address add column parcel_id integer;",
+         #"alter table crs_street_address add column meshblock_gid integer;",
+         #"alter table crs_street_address add column parcel_id integer;",
          "update crs_street_address set meshblock_gid = (select gid from mb%(year)s where the_geom && crs_street_address.shape and contains(the_geom, crs_street_address.shape));" % {'year': year},
     ]
+
     sqls.extend(parcel_update_sqls)
     sqls.extend([
          "create index idx_crs_street_address_meshblock_gid on crs_street_address ( meshblock_gid );",
@@ -65,6 +65,7 @@ def main():
     for sql in sqls:
         i += 1
         try:
+            print "executing"
             dbcur.execute(sql)
             print "succeeded (rowcount=%d) (%d of %d)" % (dbcur.rowcount, i, len(sqls))
         except:

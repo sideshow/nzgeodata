@@ -47,7 +47,7 @@ More information:
 0.1 Run linz_arcshape_import.py, supplying the path to the ARCSHAPE folder, 
 and the two-digit year that the data was produced in, like so:
 
-  python linz_arcshape_import.py Statistics_NZ/Lv1_2007_Digital_Boundaries/ARCSHAPE/ 07
+  python linz_arcshape_import.py stats_folder year dbname
 
 This script calls psql a bunch of times on your database, so you will want to 
 run as a user who has a saved password/identd auth to avoid re-entering your 

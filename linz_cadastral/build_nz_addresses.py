@@ -97,10 +97,10 @@ def main():
                     )), '; '),
                 crs_street_address.shape,
                 mb%(y)s.mb%(y)s::integer,
-                au%(y)s.au_name,
-                ua%(y)s.ua_name,
-                ta%(y)s.ta_name,
-                regc%(y)s.regc_name
+                au%(y)s.name,
+                ua%(y)s.name,
+                ta%(y)s.name,
+                regc%(y)s.name
             from crs_street_address, mb%(y)s, au%(y)s, ua%(y)s, ta%(y)s, regc%(y)s, crs_road_name, crs_title, crs_legal_desc_prl, crs_legal_desc, asp_street
             where   crs_street_address.meshblock_gid = mb%(y)s.gid
             and mb%(y)s.au%(y)s = au%(y)s.au%(y)s

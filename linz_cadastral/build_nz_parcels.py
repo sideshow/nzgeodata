@@ -110,8 +110,8 @@ def main():
                 from crs_nominal_index nmi
                 where nmi.ttl_title_no = crs_title.title_no
                 )), '; ') as proprietors,
-            au%(y)s.au_name as au_name,
-            ua%(y)s.ua_name as ua_name,
+            au%(y)s.name as au_name,
+            ua%(y)s.name as ua_name,
             parcels.shape as geom
         from
             (
